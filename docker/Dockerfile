@@ -6,13 +6,19 @@ RUN apt-get update && apt-get install -y \
 build-essential \
 git \
 golang-go \
+go-dep \
 python \
 ruby ruby-dev rubygems \
 rpm && \
 gem install --no-ri --no-rdoc fpm
 
-ENV GOPATH=/home/go
-ENV PATH=$PATH:/home/go
+ARG HOME
+ARG USER_ID
 
-WORKDIR /home/go
+RUN mkdir -p "$HOME" && chown "$USER_ID" "$HOME"
+
+ENV GOPATH="$HOME/go"
+ENV PATH="$PATH:$GOPATH/bin"
+
+WORKDIR "$HOME/go"
 CMD /bin/bash
