@@ -9,7 +9,8 @@ golang-go \
 go-dep \
 python \
 ruby ruby-dev rubygems \
-rpm && \
+rpm \
+tzdata && \
 gem install --no-ri --no-rdoc fpm
 
 ARG HOME
